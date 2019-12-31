@@ -1,48 +1,18 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
+imports:
+  - { resource: services/factory.yaml }
+  - { resource: services/repository.yaml }
+  - { resource: application/use_case.yaml }
+  - { resource: services/eventListener.yaml }
+  - { resource: services/controller.yaml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
 
-services:
-  app.abstract.repository:
-    abstract: true
-    factory: ["@doctrine.orm.entity_manager", "getRepository"]
 
-  App.event.listener.on_user_was_created:
-    class: App\Domain\User\Event\Handler\OnUserWasCreated
-    public: true
-    tags:
-      - { name: kernel.event_listener, event: App\Domain\User\Event\UserWasCreated, method: __invoke }
 
-  app_app.use_case.user_command:
-    class: App\App\UseCase\User\RegisterUserHandler
-    tags:
-      - { name: messenger.message_handler, handles: App\App\UseCase\User\Request\Register  }
-    arguments:
-      - '@App\Domain\User\Repository\UserRepositoryInterface'
-      - '@App\Domain\User\Factory\UserFactoryInterface'
 
-  App\Domain\User\Factory\UserFactoryInterface:
-    class: App\Infra\User\Factory\UserFactory
-    autowire: true
 
-  App\UI\Controller\Api\User\Register:
-    autowire: true
-    tags: ['controller.service_arguments']
 
-  App\Domain\User\Repository\UserRepositoryInterface:
-    parent: app.abstract.repository
-    class: App\Infra\User\Repository\UserRepository
-    arguments:
-      - App\Domain\User\Model\User
 
-  App\Domain\Common\Event\EventDispatcherInterface:
-    class: App\Infra\Common\Event\EventDispatcher
-    public: true
-    autowire: true
 
-  App\Domain\Common\Event\EventCollector:
-    factory: ["App\\Domain\\Common\\Event\\EventCollector", "instance"]
-    public: true
+
+
+

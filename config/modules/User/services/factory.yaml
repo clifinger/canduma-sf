@@ -1,0 +1,4 @@
+services:
+  App\Domain\User\Factory\UserFactoryInterface:
+    class: App\Infra\User\Factory\UserFactory
+    autowire: true

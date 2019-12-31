@@ -1,0 +1,4 @@
+services:
+  App\UI\Controller\Api\User\Register:
+    autowire: true
+    tags: ['controller.service_arguments']

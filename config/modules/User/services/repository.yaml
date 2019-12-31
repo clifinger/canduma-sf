@@ -1,0 +1,6 @@
+services:
+  App\Domain\User\Repository\UserRepositoryInterface:
+    parent: app.abstract.repository
+    class: App\Infra\User\Repository\UserRepository
+    arguments:
+      - App\Domain\User\Model\User

@@ -1,0 +1,13 @@
+services:
+  app.abstract.repository:
+    abstract: true
+    factory: ["@doctrine.orm.entity_manager", "getRepository"]
+
+  App\Domain\Common\Event\EventCollector:
+    factory: ["App\\Domain\\Common\\Event\\EventCollector", "instance"]
+    public: true
+
+  App\Domain\Common\Event\EventDispatcherInterface:
+    class: App\Infra\Common\Event\EventDispatcher
+    public: true
+    autowire: true
