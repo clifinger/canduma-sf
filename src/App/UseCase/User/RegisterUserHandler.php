@@ -7,14 +7,13 @@ use App\App\UseCase\User\Request\Register;
 use App\Domain\User\Model\User;
 use App\Domain\User\Factory\UserFactoryInterface;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /**
  * Class RegisterUserHandler
  * 
  * @package App\App\UseCase\User
  */
-class RegisterUserHandler implements MessageHandlerInterface
+class RegisterUserHandler
 {
     /**
      * @var UserRepositoryInterface

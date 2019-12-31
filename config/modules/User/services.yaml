@@ -18,7 +18,11 @@ services:
 
   app_app.use_case.user_command:
     class: App\App\UseCase\User\RegisterUserHandler
-    autowire: true
+    tags:
+      - { name: messenger.message_handler, handles: App\App\UseCase\User\Request\Register  }
+    arguments:
+      - '@App\Domain\User\Repository\UserRepositoryInterface'
+      - '@App\Domain\User\Factory\UserFactoryInterface'
 
   App\Domain\User\Factory\UserFactoryInterface:
     class: App\Infra\User\Factory\UserFactory
