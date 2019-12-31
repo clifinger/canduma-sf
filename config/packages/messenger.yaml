@@ -4,6 +4,7 @@ framework:
             canduma_api_plugin.command_bus:
                 middleware:
                     - doctrine_transaction
+                    - App\Infra\Common\Bus\Middleware\EventDispatcherMiddleware
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration

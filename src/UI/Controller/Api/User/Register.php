@@ -33,12 +33,13 @@ final class Register
      */
     public function __invoke()
     {
+        // TODO: Accept JSON body and return Serialized JSON
         /** @var User $user */
         $user = $this->bus->dispatch(
             new RegisterUseCase(
                 new UserId(),
-                'JuliggdenLessaanhhne',
-                'c@sssjcadajdja.com',
+                'JuliggdendddsLessaanhhne',
+                'c@sssjcadajdsddja.com',
                 'password'
             )
         );

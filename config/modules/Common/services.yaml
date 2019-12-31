@@ -11,3 +11,6 @@ services:
     class: App\Infra\Common\Event\EventDispatcher
     public: true
     autowire: true
+
+  App\Infra\Common\Bus\Middleware\EventDispatcherMiddleware:
+    autowire: true

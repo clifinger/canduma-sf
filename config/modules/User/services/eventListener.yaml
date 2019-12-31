@@ -2,4 +2,4 @@ services:
   App\Domain\User\Event\Handler\OnUserWasCreated:
     public: true
     tags:
-      - { name: kernel.event_listener, event: App\Domain\User\Event\UserWasCreated, method: __invoke }
+      - { name: kernel.event_listener, event: UserWasCreated, method: __invoke }

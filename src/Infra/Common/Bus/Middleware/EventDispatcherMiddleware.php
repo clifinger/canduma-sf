@@ -1,27 +1,28 @@
 <?php
 
-namespace Leos\Infrastructure\CommonBundle\Bus\Middleware;
+namespace App\Infra\Common\Bus\Middleware;
 
-use League\Tactician\Middleware;
-use Leos\Domain\Common\Event\EventDispatcherInterface;
+use App\Domain\Common\Event\EventDispatcherInterface;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
+use Symfony\Component\Messenger\Middleware\StackInterface;
 
-class EventDispatcherMiddleware implements Middleware
+class EventDispatcherMiddleware implements MiddlewareInterface
 {
 
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function execute($command, callable $next)
+    public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
-        $returnValue = $next($command);
-
+        $returnValue = $stack->next()->handle($envelope, $stack);
         $this->eventDispatcher->dispatch();
 
         return $returnValue;
