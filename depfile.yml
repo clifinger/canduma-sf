@@ -21,9 +21,3 @@ ruleset:
   Infrastructure:
     - Domain
     - Application
-
-skip_violations:
-  App\Domain\User\Event\Handler\OnUserWasCreated:
-    - App\Infra\Common\Event\EventAware
-  App\App\UseCase\Security\LoginHandler:
-    - App\Infra\Security\Model\Auth
