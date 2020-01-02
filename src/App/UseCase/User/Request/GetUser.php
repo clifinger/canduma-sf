@@ -14,7 +14,7 @@ class GetUser
     /**
      * @var UserId
      */
-    private $uuid;
+    private UserId $uuid;
 
     /**
      * GetUser constructor.
@@ -22,7 +22,6 @@ class GetUser
      */
     public function __construct(string $uuid)
     {
-
         $this->uuid = new UserId($uuid);
     }
 

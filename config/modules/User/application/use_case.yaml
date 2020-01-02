@@ -6,3 +6,4 @@ services:
     arguments:
       - '@App\Domain\User\Repository\UserRepositoryInterface'
       - '@App\Domain\User\Factory\UserFactoryInterface'
+      - '@App\Domain\Common\Message\MessageTransportInterface'

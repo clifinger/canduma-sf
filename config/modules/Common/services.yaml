@@ -14,3 +14,8 @@ services:
 
   App\Infra\Common\Bus\Middleware\EventDispatcherMiddleware:
     autowire: true
+
+  App\Domain\Common\Message\MessageTransportInterface:
+    class: App\Infra\Common\Bus\MessageDispatcher
+    arguments:
+      ['@messenger.routable_message_bus']

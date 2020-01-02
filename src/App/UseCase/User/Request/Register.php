@@ -14,22 +14,22 @@ class Register
     /**
      * @var string
      */
-    private $username;
+    private string $username;
     
     /**
      * @var string
      */
-    private $email;
+    private string $email;
     
     /**
      * @var string
      */
-    private $plainPassword;
+    private string $plainPassword;
 
     /**
      * @var UserId
      */
-    private $userId;
+    private UserId $userId;
 
     public function __construct(UserId $userId, string $username, string $email, string $plainPassword)
     {

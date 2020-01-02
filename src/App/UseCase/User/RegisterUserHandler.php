@@ -4,9 +4,12 @@ namespace App\App\UseCase\User;
 
 use App\App\UseCase\User\Request\Register;
 
+use App\Domain\Common\Message\MessageTransportInterface;
+use App\Domain\User\Event\UserWasCreated;
 use App\Domain\User\Model\User;
 use App\Domain\User\Factory\UserFactoryInterface;
 use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\ValueObject\UserId;
 
 /**
  * Class RegisterUserHandler
@@ -18,17 +21,23 @@ class RegisterUserHandler
     /**
      * @var UserRepositoryInterface
      */
-    private $repository;
+    private UserRepositoryInterface $repository;
     
     /**
      * @var UserFactoryInterface
      */
-    private $factory;
+    private UserFactoryInterface $factory;
 
-    public function __construct(UserRepositoryInterface $repository, UserFactoryInterface $factory)
+    /**
+     * @var MessageTransportInterface
+     */
+    private MessageTransportInterface $eventBus;
+
+    public function __construct(UserRepositoryInterface $repository, UserFactoryInterface $factory, MessageTransportInterface $eventBus)
     {
         $this->repository = $repository;
         $this->factory = $factory;
+        $this->eventBus = $eventBus;
     }
 
     public function __invoke(Register $request): User
@@ -37,6 +46,11 @@ class RegisterUserHandler
         $user = $this->factory->register($request->toForm());
         
         $this->repository->save($user);
+        $uuid = new UserId($user->uuid());
+
+        $this->eventBus->dispatchRoutedMessageAfterMiddleware(
+            new UserWasCreated($uuid, $user->username(), $user->email())
+        );
 
         return $user;
     }

@@ -11,6 +11,7 @@ use App\Domain\User\ValueObject\UserId;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Symfony\Component\Routing\Annotation\Route;
 
 final class Register
@@ -18,16 +19,14 @@ final class Register
     /**
      * @var MessageBusInterface
      */
-    private $bus;
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private MessageBusInterface $bus;
+
 
     public function __construct(MessageBusInterface $bus)
     {
         $this->bus = $bus;
     }
+
     /**
      * @Route("/api/user/register", name="app_api_user_register")
      */
@@ -38,8 +37,8 @@ final class Register
         $user = $this->bus->dispatch(
             new RegisterUseCase(
                 new UserId(),
-                'JuliggdendddsLessaanhhne',
-                'c@sssjcadajdsddja.com',
+                'Jujddkfjkddshnzze',
+                'c@vgasssddddkkszzdddd.com',
                 'password'
             )
         );

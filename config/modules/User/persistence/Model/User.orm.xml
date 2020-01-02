@@ -21,6 +21,7 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true"/>
 
         <embedded name="auth" class="App\Domain\Security\ValueObject\AuthUser"/>
+
     </entity>
 
 </doctrine-mapping>

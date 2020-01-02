@@ -1,0 +1,29 @@
+paths:
+  - ./src
+exclude_files:
+layers:
+  - name: Domain
+    collectors:
+      - type: className
+        regex: App\\Domain\\.*
+  - name: Application
+    collectors:
+      - type: className
+        regex: App\\App\\.*
+  - name: Infrastructure
+    collectors:
+      - type: className
+        regex: App\\Infra\\.*
+ruleset:
+  Domain:
+  Application:
+    - Domain
+  Infrastructure:
+    - Domain
+    - Application
+
+skip_violations:
+  App\Domain\User\Event\Handler\OnUserWasCreated:
+    - App\Infra\Common\Event\EventAware
+  App\App\UseCase\Security\LoginHandler:
+    - App\Infra\Security\Model\Auth

@@ -3,15 +3,16 @@ framework:
         buses:
             canduma_api_plugin.command_bus:
                 middleware:
-                    - doctrine_transaction
+                    - dispatch_after_current_bus
                     - App\Infra\Common\Bus\Middleware\EventDispatcherMiddleware
+                    - doctrine_transaction
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
-            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            async: '%env(MESSENGER_TRANSPORT_DSN)%'
             # failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+            sync: 'sync://'
 
         routing:
             # Route your messages to the transports
-            # 'App\Message\YourMessage': async
+            'App\Domain\User\Event\UserWasCreated': async
