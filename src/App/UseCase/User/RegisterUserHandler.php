@@ -49,7 +49,11 @@ class RegisterUserHandler
         $uuid = new UserId($user->uuid());
 
         $this->eventBus->dispatchRoutedMessageAfterMiddleware(
-            new UserWasCreated($uuid, $user->username(), $user->email())
+            new UserWasCreated(
+                new UserId($user->uuid()),
+                $user->username(),
+                $user->email()
+            )
         );
 
         return $user;

@@ -7,3 +7,11 @@ services:
       - '@App\Domain\User\Repository\UserRepositoryInterface'
       - '@App\Domain\User\Factory\UserFactoryInterface'
       - '@App\Domain\Common\Message\MessageTransportInterface'
+
+  app_app.use_case.user_test:
+    class: App\Infra\User\Messenger\UserWasCreatedHandler
+    tags:
+      - { name: messenger.message_handler, handle: __invoke  }
+    arguments:
+      - '@App\Domain\User\Repository\UserRepositoryInterface'
+      - '@mailer.mailer'

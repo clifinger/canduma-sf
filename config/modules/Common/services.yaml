@@ -19,3 +19,7 @@ services:
     class: App\Infra\Common\Bus\MessageDispatcher
     arguments:
       ['@messenger.routable_message_bus']
+
+  App\Infra\User\Messenger\UserWasCreatedHandler:
+    autowire: true
+    public: true

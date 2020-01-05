@@ -21,3 +21,4 @@
 .idea/
 .env
 .deptrac.cache
+/logs/

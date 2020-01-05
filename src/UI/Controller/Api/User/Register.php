@@ -37,8 +37,8 @@ final class Register
         $user = $this->bus->dispatch(
             new RegisterUseCase(
                 new UserId(),
-                'JujddSSkfjkddshne',
-                'c@vgasssddddkksksDDdddd.com',
+                'Jdssddhne',
+                'c@azert.com',
                 'password'
             )
         );
